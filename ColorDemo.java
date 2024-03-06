@@ -16,7 +16,7 @@ public class ColorDemo {
 	    // Constructs a few color objects:		
 		Color black  = new Color(0, 0, 0);
 		Color white  = new Color(255, 255, 255);
-		Color red    = new Color(255, 0, 0);
+		Color red    = new Color(255, 123, 0);
 		Color yellow = new Color(255, 255, 0);
 
         // To access the RGB values of a Color object,

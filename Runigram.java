@@ -28,7 +28,7 @@ public class Runigram {
 		// print(scaled(imageOut, 8, 8));
 
 
-		display(scaled(tinypic, 8, 8));
+		print(scaled(tinypic, 3, 5));
 	}
 
 	/** Returns a 2D array of Color values, representing the image data
@@ -146,16 +146,16 @@ public class Runigram {
 	 */
 	public static Color[][] scaled(Color[][] image, int width, int height) {
 		//// Replace the following statement with your code // 
-		long rows = image.length; // the previous photos rows
-		long cols = image[0].length; // the preהious photos columns
-		Color[][] scaledImage = new Color[width][height];
+		long h0 = image.length; // the previous photos rows
+		long w0 = image[0].length; // the preהious photos columns
+		Color[][] scaledImage = new Color[height][width];
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				int newWidth = (int)(i * ((double)cols / width));
-				int newHeight = (int)(j * ((double)rows / height));
+				int newCol = (int)(i * ((double)w0 / width));
+				int newRow = (int)(j * ((double)h0 / height));
 
-				scaledImage[i][j] = image[newHeight][newWidth];
+				scaledImage[j][i] = image[newRow][newCol];
 			}
 		}
 		return scaledImage;

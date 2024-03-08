@@ -11,7 +11,6 @@ public class Runigram {
 		
 		// // Tests the reading and printing of an image:	
 		Color[][]tinypic  = read("tinypic.ppm");
-		Color[][]tinypic2  = read("tinypic2.ppm");
 		// print(tinypic);
 
 		// // Creates an image which will be the result of various 
@@ -29,7 +28,7 @@ public class Runigram {
 		// print(scaled(imageOut, 8, 8));
 
 
-		morph(tinypic, tinypic2, 20);
+		display(scaled(tinypic, 8, 8));
 	}
 
 	/** Returns a 2D array of Color values, representing the image data
@@ -156,7 +155,7 @@ public class Runigram {
 				int newWidth = (int)(i * ((double)cols / width));
 				int newHeight = (int)(j * ((double)rows / height));
 
-				scaledImage[i][j] = image[newWidth][newHeight];
+				scaledImage[i][j] = image[newHeight][newWidth];
 			}
 		}
 		return scaledImage;

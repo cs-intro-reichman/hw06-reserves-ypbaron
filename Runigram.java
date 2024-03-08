@@ -7,26 +7,29 @@ public class Runigram {
 
 	public static void main(String[] args) {
 	    
-		//// Hide / change / add to the testing code below, as needed.
+		// //// Hide / change / add to the testing code below, as needed.
 		
-		// Tests the reading and printing of an image:	
+		// // Tests the reading and printing of an image:	
 		Color[][]tinypic  = read("tinypic.ppm");
-		print(tinypic);
+		Color[][]tinypic2  = read("tinypic2.ppm");
+		// print(tinypic);
 
-		// Creates an image which will be the result of various 
-		// image processing operations:
-		Color[][] imageOut;
+		// // Creates an image which will be the result of various 
+		// // image processing operations:
+		// Color[][] imageOut;
 
-		// Tests the horizontal flipping of an image:
-		imageOut = flippedHorizontally(tinypic);
-		System.out.println();
-		print(imageOut);
+		// // Tests the horizontal flipping of an image:
+		// imageOut = flippedHorizontally(tinypic);
+		// System.out.println();
+		// print(imageOut);
 		
-		//// Write here whatever code you need in order to test your work.
-		imageOut = grayScaled(tinypic);
-		System.out.println();
-		print(scaled(imageOut, 8, 8));
-		//// You can reuse / overide the contents of the imageOut array.
+		// //// Write here whatever code you need in order to test your work.
+		// imageOut = grayScaled(tinypic);
+		// System.out.println();
+		// print(scaled(imageOut, 8, 8));
+
+
+		morph(tinypic, tinypic2, 20);
 	}
 
 	/** Returns a 2D array of Color values, representing the image data
@@ -167,7 +170,24 @@ public class Runigram {
 	 */
 	public static Color blend(Color c1, Color c2, double alpha) {
 		//// Replace the following statement with your code
-		return null;
+		int r1 = c1.getRed();
+		int g1 = c1.getGreen();
+		int b1 = c1.getBlue();
+		int r2 = c2.getRed();
+		int g2 = c2.getGreen();
+		int b2 = c2.getBlue();
+
+		double newRedD = Math.round(alpha * r1 + (1 - alpha) * r2);// new red combination as a double
+		double newGreenD = Math.round(alpha * g1 + (1 - alpha) * g2);// new green combination as a double
+		double newBlueD = Math.round(alpha * b1 + (1 - alpha) * b2);// new blue combination as a double
+
+		int newRed = (int)newRedD;
+		int newGreen = (int)newGreenD;
+		int newBlue = (int)newBlueD;
+
+
+		Color blendedColor = new Color(newRed, newGreen, newBlue);// the new combined color
+		return blendedColor;
 	}
 	
 	/**
@@ -178,7 +198,17 @@ public class Runigram {
 	 */
 	public static Color[][] blend(Color[][] image1, Color[][] image2, double alpha) {
 		//// Replace the following statement with your code
-		return null;
+		int rows = image1.length;
+		int cols = image1[0].length;
+
+		Color[][] blendedColors = new Color[rows][cols];
+
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) { 
+				blendedColors[i][j] = blend(image1[i][j], image2[i][j], alpha);// retrieves pixel from image 1 and 2 - ask daniel question about this
+			}
+		}	
+		return blendedColors;
 	}
 
 	/**
@@ -189,6 +219,19 @@ public class Runigram {
 	 */
 	public static void morph(Color[][] source, Color[][] target, int n) {
 		//// Replace this comment with your code
+		int sourceRows = source.length;
+		int sourceCols = source[0].length;
+		double alpha = 0;
+
+		if (sourceRows != target.length || sourceCols != target[0].length){ // what is it not ok to check arrays directly
+			target = scaled(target, sourceRows, sourceCols); // scales the picture to 
+		}
+
+		for( int i = 0; i <= n; i++){
+			alpha = (double)(n - i)/n; // calculates the new alpha
+			Color [][] blendedImage = blend(source, target, alpha); // blends the new image - how does it work if it returns void?
+			print(blendedImage);
+		}
 	}
 	
 	/** Creates a canvas for the given image. */

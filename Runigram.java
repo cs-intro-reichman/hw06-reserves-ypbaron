@@ -147,19 +147,19 @@ public class Runigram {
 	 */
 	public static Color[][] scaled(Color[][] image, int width, int height) {
 		//// Replace the following statement with your code // 
-		long sourceRows = image.length; // the previous photos rows
-		long sourceCols = image[0].length; // the preהious photos columns
-		Color[][] scaledColors = new Color[width][height];
-		for (int i = 0; i < width; i++){
-			for (int j = 0; j < height; j++){
-				int newWidth = (int)(i *  ((double)sourceRows / width));
-				int newHeight = (int)(j * ((double)sourceCols / height));
-	
-				scaledColors[i][j] = image[newWidth][newHeight];
-				
+		long rows = image.length; // the previous photos rows
+		long cols = image[0].length; // the preהious photos columns
+		Color[][] scaledImage = new Color[width][height];
+
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				int newWidth = (int)(i * ((double)cols / width));
+				int newHeight = (int)(j * ((double)rows / height));
+
+				scaledImage[i][j] = image[newWidth][newHeight];
 			}
 		}
-		return scaledColors;
+		return scaledImage;
 	}
 	
 	/**
